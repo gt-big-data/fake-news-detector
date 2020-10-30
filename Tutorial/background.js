@@ -11,9 +11,28 @@ chrome.browserAction.onClicked.addListener(function(tab) {
 
 // This block is new!
 chrome.runtime.onMessage.addListener(
-  function(request, sender, sendResponse) {
+  function(request, sender, sendResponse) {``
     if( request.message === "open_new_tab" ) {
       chrome.tabs.create({"url": request.url});
     }
   }
 );
+
+let seltext = null;
+
+chrome.extension.onRequest.addListener(function(request, sender, sendResponse)
+{
+    /*switch(request.message)
+    {
+        case 'setText':
+            window.seltext = request.data
+        break;
+         
+        default:
+            sendResponse({data: 'Invalid arguments'});
+        break;
+    }*/
+    window.seltext = request.data;
+    alert("Highlighted Text: " + window.seltext);
+});
+ 
