@@ -5,7 +5,18 @@ import time
 import bs4
 from bs4 import BeautifulSoup
 
-def NPR_article_parser(url):
+def find_text(tag):
+    paragraph = ""
+    for element in tag.children:
+        # The find_all method return an image caption twice. One of the repeats contains <b>hide caption<b> tag
+        # Ignore that tag if we see it.
+        if element.string.strip() == "hide caption":
+            return " "
+        # for all other child elements, extract the text and append it to paragraph
+        paragraph += element.string.strip() + " "
+    return paragraph
+    
+def parse(url):
     output = {}
 
     response = requests.get(url)
@@ -24,18 +35,4 @@ def NPR_article_parser(url):
 
     return output
 
-def find_text(tag):
-    paragraph = ""
-    for element in tag.children:
-        # The find_all method return an image caption twice. One of the repeats contains <b>hide caption<b> tag
-        # Ignore that tag if we see it.
-        if element.string.strip() == "hide caption":
-            return " "
-        # for all other child elements, extract the text and append it to paragraph
-        paragraph += element.string.strip() + " "
-    return paragraph
 
-if __name__ == "__main__":
-    url = input().strip()
-    result = NPR_article_parser(url)
-    print(result)

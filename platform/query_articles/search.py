@@ -1,6 +1,6 @@
 from googlesearch import search
 
-def searchGoogle(query):
+def search_google(query):
     websiteDict = {}
     for result in search(query, tld="com", num=30, stop=30, pause=2): 
         if "foxnews.com" in result or "cnn.com" in result or "cnbc.com" in result or "npr.org" in result:

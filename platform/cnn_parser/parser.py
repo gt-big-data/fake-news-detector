@@ -4,7 +4,7 @@ import time;
 import bs4;
 from bs4 import BeautifulSoup;
 
-def CNN_article_parser(url):
+def parse(url):
     output = {};
     # Do a get request to obain the article
     response = requests.get(url);
@@ -21,11 +21,4 @@ def CNN_article_parser(url):
                 output["body"] += child;
 
     return output
-
-if __name__ == "__main__":
-    url = input("Please enter a CNN article url: ").strip();
-    # url = "https://www.cnn.com/2020/10/12/health/johnson-coronavirus-vaccine-pause-bn/index.html";
-    # url = "https://www.cnn.com/2020/10/12/politics/iowa-senate-race-joni-ernst/index.html";
-    print(CNN_article_parser(url));
-
     

@@ -1,0 +1,1 @@
+from fox_parser.parser import parse

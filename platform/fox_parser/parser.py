@@ -1,7 +1,8 @@
 import requests
 from bs4 import BeautifulSoup
 
-def foxParser(url):
+def parse(url):
+    print(url)
     request = requests.get(url)
     coverpage = request.content
     soup1 = BeautifulSoup(coverpage, 'html.parser')
