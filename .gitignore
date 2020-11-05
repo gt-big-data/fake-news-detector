@@ -127,3 +127,8 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# .DS_Store: mac index file
+/platform/.DS_Store
+/platform/cnn-parser/.DS_Store
+/platform/npr-parser/.DS_Store
