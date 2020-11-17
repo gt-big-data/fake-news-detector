@@ -31,8 +31,8 @@ def parse(url):
     #If page text can be parsed based on pre-determined CSS classes, this updates the title and gets the body text
     output['title'] = ''
     try:
-        output['title'] = soup.find('h1', attrs={"class": ["pg-headline", "headline__text"]}).text
-        content = soup.find_all(attrs={"class": ["zn-body__paragraph", "paragraph", "list-items"]})
+        output['title'] = soup.find('h1', attrs={"class": ["pg-headline", "headline__text", "sc-jTzLTM"]}).text
+        content = soup.find_all(attrs={"class": ["zn-body__paragraph", "paragraph", "list-items", "sc-gxMtzJ", "sc-dfVpRl", "sc-gZMcBi"]})
         if not content:
             raise Exception()
     except Exception:
@@ -43,9 +43,14 @@ def parse(url):
     try:
         output['body'] = ''
         for paragraph in content:
-            output['body'] += paragraph.text
+            text = paragraph.text.replace(u'\xa0', ' ')
+            output['body'] += text
 
             #Adds a space after a section if there is no terminating space
+            try:
+                output['body'][-1]
+            except:
+                continue
             if output['body'][-1] != ' ':
                 output['body'] += ' '
     except:
@@ -55,5 +60,3 @@ def parse(url):
         output['body'] = output['body'][:-1:]
 
     return output
-
-
