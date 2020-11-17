@@ -1,1 +1,1 @@
-from cnbc_parser import parse
+from cnbc_parser.parser import parse

@@ -3,6 +3,7 @@ import pandas as pd
 import cnn_parser
 import fox_parser
 import npr_parser
+import cnbc_parser
 import query_articles
 
 def get_articles(query):
@@ -17,6 +18,8 @@ def get_articles(query):
                 parsed_data = fox_parser.parse(article_url)
             elif(news_source == 'npr'):
                 parsed_data = npr_parser.parse(article_url)
+            elif(news_source == 'cnbc'):
+                parsed_data = cnbc_parser.parse(article_url)
             if(parsed_data):
                 out_data.append({
                     "title": parsed_data["title"],
@@ -25,6 +28,5 @@ def get_articles(query):
                 })
     article_df = pd.DataFrame(data=out_data)
     return article_df
-print(get_articles("trump visits prime minister"))
-
+print(get_articles('amazon and facebook grilled by senate'))
 
