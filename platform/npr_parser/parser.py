@@ -19,16 +19,16 @@ def find_text(tag):
 def parse(url):
     #Check if link has leading https://
     try:
-        url.index('https://')
+        url.index('http')
     except ValueError:
         url = 'https://' + url
 
     #Check if link has been passed to the correct parser
     try:
-        url.index('https://www.npr')
+        url.index('//www.npr')
     except ValueError:
-        print('Incorrect parser used with this URL.')
-        exit()
+        print('Incorrect parser used with ' + '\'' + url + '\'')
+        return None
 
     output = {}
     try:
@@ -38,8 +38,8 @@ def parse(url):
         soup = BeautifulSoup(response.text, "html.parser")
         article = soup.find("article", class_="story")
     except:
-        print('Not a valid article.')
-        exit()
+        print('\'' + url + '\'' + ' page info could not be requested.')
+        return None
 
     try:
         # the article title is wrapped within the h1 tag inside a div with class="storytitle"
@@ -52,8 +52,8 @@ def parse(url):
         if not content_tags:
             raise Exception()
     except:
-        print('Page text has unrecognized attributes and/or formatting.')
-        exit()
+        print('\'' + url + '\'' + ' has unrecognized attributes and/or formatting.')
+        return None
 
     try:
         #Parses text out of the p tags in content_tags and updates the body
@@ -79,7 +79,8 @@ def parse(url):
             if output['body'][-1] != ' ':
                 output['body'] += ' '
     except:
-        print('Unexpected error occurred while parsing through the body text.')
+        print('Unexpected error occurred while parsing through ' + '\'' + url + '\'')
+        return None
     finally:
         #Removes line break characters and terminating space
         output['body'] = output['body'][:-1:]

@@ -2,9 +2,9 @@ from googlesearch import search
 
 def search_google(query):
     websiteDict = {}
-    for result in search(query, tld="com", num=30, stop=30, pause=2): 
-        if "foxnews.com" in result or "cnn.com" in result or "cnbc.com" in result or "npr.org" in result:
-            if "foxnews.com" in result:
+    for result in search(query, tld="com", num=30, stop=30, pause=2):
+        if "www.foxnews.com" in result or "www.foxbusiness.com" in result or "www.cnn.com" in result or "www.cnbc.com" in result or "www.npr.org" in result:
+            if "foxnews.com" in result or "foxbusiness.com" in result:
                 if "fox" in websiteDict:
                     websiteDict["fox"].append(result)
                 else:
@@ -15,7 +15,7 @@ def search_google(query):
                 else:
                     websiteDict["cnn"] = [result]
             if "cnbc.com" in result:
-                if "fox" in websiteDict:
+                if "cnbc" in websiteDict:
                     websiteDict["cnbc"].append(result)
                 else:
                     websiteDict["cnbc"] = [result]
