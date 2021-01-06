@@ -8,6 +8,7 @@ from keras import Sequential, Model
 from keras.layers import Conv1D, Dropout, Dense, Embedding, MaxPooling1D, Concatenate, Flatten, Input
 from keras.layers.merge import concatenate
 
+
 # load the data set from the train csv files
 def load_train_data():     
     #create Pandas dataframes from the two csv files
