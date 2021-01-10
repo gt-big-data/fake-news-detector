@@ -12,7 +12,7 @@ from keras.layers.merge import concatenate
 # load the data set from the train csv files
 def load_train_data():     
     #create Pandas dataframes from the two csv files
-    train_bodies = pandas.read_csv("./dataset/train_bodies.csv", encoding='utf-8')
+    train_bodies = pandas.read_csv("./dataset/train_stances.csv", encoding='utf-8')
     train_headlines = pandas.read_csv("./dataset/train_stances.csv", encoding='utf-8')
 
     #merge the csv files on Body ID
@@ -77,23 +77,23 @@ def create_model(embedding_matrix, vocab_size, input_length):
 
     model.add(Conv1D(256, 5, activation='relu'))
     model.add(Dropout(0.5))
-    model.add(MaxPooling1D(pool_size=5))
+    model.add(MaxPooling1D(pool_size=6))
 
     model.add(Conv1D(256, 5, activation='relu'))
     model.add(Dropout(0.5))
-    model.add(MaxPooling1D(pool_size=5))
+    model.add(MaxPooling1D(pool_size=6))
 
     model.add(Conv1D(512, 5, activation='relu'))
     model.add(Dropout(0.5))
-    model.add(MaxPooling1D(pool_size=5))
+    model.add(MaxPooling1D(pool_size=6))
 
     model.add(Conv1D(512, 5, activation='relu'))
     model.add(Dropout(0.5))
-    model.add(MaxPooling1D(pool_size=5))
+    model.add(MaxPooling1D(pool_size=6))
 
     model.add(Conv1D(768, 5, activation='relu'))
     model.add(Dropout(0.5))
-    model.add(MaxPooling1D(pool_size=5))
+    model.add(MaxPooling1D(pool_size=6))
 
     return model
 
