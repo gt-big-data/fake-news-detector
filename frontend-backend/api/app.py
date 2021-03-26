@@ -1,15 +1,15 @@
 from flask import Flask
 from flask import request
 #import usearchapi
-from tensorflow import keras
-import test
-from decouple import config
+#from tensorflow import keras
+#import test
+#from decouple import config
 
-rootPath = config('ROOT')
+#rootPath = config('ROOT')
 
-model = keras.models.load_model(rootPath)
+#model = keras.models.load_model(rootPath)
 query = "No query yet"
-prediction = "empty"
+prediction = "N/A"
 
 app = Flask(__name__)
 @app.route("/predict", methods=["GET", "POST"])
@@ -25,14 +25,15 @@ def predict():
         predictions.append(test.test(query, article, model))
     predictionString = ""
     for prediction in predictions:
-        predictionString += prediction + "\n"
-    return "NULL"'''
-    prediction = "Agree!"
+        predictionString += prediction + "\n"'''
+    prediction = "Agree"
+    return {"prediction" : prediction, "receive" : query}
 
-@app.route('/send')
+'''@app.route('/send')
 def send():
     global prediction
-    return {"prediction" : prediction}
+    global query
+    return {"prediction" : prediction, "receive" : query}'''
 
 if __name__ == "__main__":
     app.run(debug=True)
