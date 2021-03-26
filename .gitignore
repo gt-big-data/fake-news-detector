@@ -135,14 +135,12 @@ dmypy.json
 /platform/npr-parser/.DS_Store
 
 # Yarn
-.yarn/
-.yarnrc.yml
-yarn.lock
-!.yarn/patches
-!.yarn/releases
-!.yarn/plugins
-!.yarn/sdks
-!.yarn/versions
+frontend-backend/.yarn/*
+!frontend-backend/.yarn/patches
+!frontend-backend/.yarn/releases
+!frontend-backend/.yarn/plugins
+!frontend-backend/.yarn/sdks
+!frontend-backend/.yarn/versions
 .pnp.*
 
 # IntelliJ
