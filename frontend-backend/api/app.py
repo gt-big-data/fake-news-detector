@@ -1,6 +1,6 @@
 from flask import Flask
 from flask import request
-#import usearchapi
+import usearchapi
 from tensorflow import keras
 import test
 from decouple import config
@@ -11,7 +11,7 @@ model = keras.models.load_model(rootPath)
 query = "No query yet"
 prediction = "empty"
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='../build', static_url_path='/')
 @app.route("/predict", methods=["GET", "POST"])
 def predict():
     global query
@@ -33,6 +33,10 @@ def predict():
 def send():
     global prediction
     return {"prediction" : prediction}
+
+@app.route('/')
+def index():
+    return app.send_static_file('index.html')
 
 if __name__ == "__main__":
     app.run(debug=True)

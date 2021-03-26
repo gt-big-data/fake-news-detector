@@ -102,8 +102,9 @@ celerybeat.pid
 *.sage.py
 
 # Environments
-.env
+frontend-backend/api/.env
 .venv
+.env
 env/
 venv/
 ENV/
@@ -132,3 +133,17 @@ dmypy.json
 /platform/.DS_Store
 /platform/cnn-parser/.DS_Store
 /platform/npr-parser/.DS_Store
+
+# Yarn
+.yarn/
+.yarnrc.yml
+yarn.lock
+!.yarn/patches
+!.yarn/releases
+!.yarn/plugins
+!.yarn/sdks
+!.yarn/versions
+.pnp.*
+
+# IntelliJ
+.idea/
