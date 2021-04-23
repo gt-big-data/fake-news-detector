@@ -1,1 +1,0 @@
-from cnn_parser.parser import parse

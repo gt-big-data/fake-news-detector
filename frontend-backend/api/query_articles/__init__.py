@@ -1,1 +1,0 @@
-from query_articles.search import search_google

@@ -18,5 +18,6 @@ def call_usearch_news_api(query):
 
     output = []
     for article in res['value']:
-        output.append([article['title'], article['body']])
+        print(article)
+        output.append([article['title'], article['body'], article['url']])
     return output

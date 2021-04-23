@@ -6,17 +6,21 @@ import { Textarea, Text } from "@chakra-ui/react"
 import { Heading } from "@chakra-ui/react"
 import { Stack, HStack, VStack } from "@chakra-ui/react"
 import React, { useState, useEffect } from 'react';
+import Card from "./Card.js"
 
 function App() {
   //const [query, setQuery] = useState("No inputted query yet");
-  const [text, setText] = useState("")
-  const [predict, setPredict] = useState("N/A")
+  const [text, setText] = useState("N/A")
+  //const [predict, setPredict] = useState("N/A")
+  const [receive, setRecieve] = useState("No inputted query yet")
+  const [responseList, setResponseList] = useState([])
   
-    useEffect(() => {
+    /*useEffect(() => {
       fetch('/send').then(res => res.json()).then(data => {
         setPredict(data.prediction);
+        setRecieve(data.receive);
       });
-    }, []);
+    }, []);*/
 
     function handleSubmit(e) {
       e.preventDefault();
@@ -28,20 +32,25 @@ function App() {
           'Content-type': 'application/json',
         },
         body : JSON.stringify(data),
-      })
-      window.location.reload();
+      }).then(res => res.json().then(data => {
+        //setPredict(data.prediction);
+        setRecieve(data.receive);
+        setResponseList(data.data);
+        //responseList.map(entry => { return <Card link={entry.link} prediction={entry.prediction} /> })
+      }))
     }
 
   return (
     <ChakraProvider>
-      <VStack spacing="50px">
+      <VStack spacing="25px">
       <Heading>
         Fake News Detector
       </Heading>
         <Textarea placeholder="Enter claim" onChange={event => setText(event.target.value)}/>
         <Button colorScheme="blue" onClick = {handleSubmit}>Submit</Button>
-        <Text>Submitted query: {text}</Text>
-        <Text>Prediction: {predict}</Text>
+        <Text>Submitted query: {receive}</Text>
+        <Heading>Predictions:</Heading>
+        <VStack spacing="30px">{responseList.map((entry) => <Card title={entry.title} link={entry.link} prediction={entry.prediction} />)}</VStack>
       </VStack>
     </ChakraProvider>
   );
