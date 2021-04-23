@@ -6,12 +6,14 @@ import { Textarea, Text } from "@chakra-ui/react"
 import { Heading } from "@chakra-ui/react"
 import { Stack, HStack, VStack } from "@chakra-ui/react"
 import React, { useState, useEffect } from 'react';
+import Card from "./Card.js"
 
 function App() {
   //const [query, setQuery] = useState("No inputted query yet");
   const [text, setText] = useState("N/A")
-  const [predict, setPredict] = useState("N/A")
+  //const [predict, setPredict] = useState("N/A")
   const [receive, setRecieve] = useState("No inputted query yet")
+  const [responseList, setResponseList] = useState([])
   
     /*useEffect(() => {
       fetch('/send').then(res => res.json()).then(data => {
@@ -31,8 +33,10 @@ function App() {
         },
         body : JSON.stringify(data),
       }).then(res => res.json().then(data => {
-        setPredict(data.prediction);
+        //setPredict(data.prediction);
         setRecieve(data.receive);
+        setResponseList(data.data);
+        //responseList.map(entry => { return <Card link={entry.link} prediction={entry.prediction} /> })
       }))
     }
 
@@ -45,7 +49,8 @@ function App() {
         <Textarea placeholder="Enter claim" onChange={event => setText(event.target.value)}/>
         <Button colorScheme="blue" onClick = {handleSubmit}>Submit</Button>
         <Text>Submitted query: {receive}</Text>
-        <Text>Prediction: {predict}</Text>
+        <Heading>Predictions:</Heading>
+        <VStack spacing="30px">{responseList.map((entry) => <Card title={entry.title} link={entry.link} prediction={entry.prediction} />)}</VStack>
       </VStack>
     </ChakraProvider>
   );
